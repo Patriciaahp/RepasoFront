@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <form id="calculator">
+        <h3>Calculator</h3>
+        <label for="num1">Enter number:</label>
+         <input placeholder="First operator..." id="num1" type="text" name="num1">
+        <label for="operator">Operator:</label>
+        <select name="operator" id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+          </select>
+
+        <label for="num2">Second number:</label>
+        <input placeholder="Second operator..." type="text" id="num2" name="num2"><br><br>
+        <input class="sub" type="submit" value="Try me!">
+              
+      </form> 
+    
+</body>
+</html>
+<script>
+   $(document).ready(function() {
+            $('#calculator').on('submit', function(event) {
+                event.preventDefault();
+
+                let number1 = parseInt($('#num1').val());
+                let op = $('#operator').val();
+                let number2 = parseInt($('#num2').val());
+                let res;
+
+                if (number1 < 0 || number2 < 0 || isNaN(number1) || isNaN(number2)) {
+                    res = "Error :(";
+                } else {
+                    switch (op) {
+                        case "+":
+                            res = number1 + number2;
+                            break;
+                        case "-":
+                            res = number1 - number2;
+                            break;
+                        case "*":
+                            res = number1 * number2;
+                            break;
+                        case "/":
+                            if (number2 === 0) {
+                                res = "It's over 9000!";
+                                return;
+                            }
+                            res = number1 / number2;
+                            break;
+                        case "%":
+                            if (number2 === 0) {
+                                res = "It's over 9000!";
+                                return;
+                            }
+                            res = number1 % number2;
+                            break;
+                    }
+                }
+
+                alert("El resultado es: " + res);
+                console.log("El resultado es: " + res);
+});
+});
+
+    </script>
+    <style>
+form
+{
+    display: flex;
+    flex-direction: column;
+    background-color: lightpink;
+    margin: 20%;
+    padding: 15%;
+    border-radius: 10%;
+}
+label
+{
+    padding: 5%;
+  
+}
+.sub
+{
+    padding: 5%;
+    margin-top: 15%;
+    color: white;
+    background-color: red;
+    border-radius: 10%;
+}
+.sub:hover
+{
+    background-color: rgb(195, 61, 61);
+    box-shadow: 5px 5px 10px black;
+}
+
+    </style>

@@ -1,0 +1,25 @@
+  .dropdown:hover ul
+    {
+ display: block;
+      
+    }
+    ul
+    {
+        display: none;
+        margin-top: -0.5%;
+    }
+    li
+    {
+       
+        list-style: none;
+       width: 20%; 
+        background-color: rgb(243, 214, 100);
+        border: rgb(255, 174, 0) 1px solid;
+        text-align: center;
+        margin-left: -5%;
+        
+    }
+    img
+    {
+        width: 5%;
+    }

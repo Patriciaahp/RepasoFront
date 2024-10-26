@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO list</title>
+</head>
+<body>
+    <button id="button">New</button>
+    <div id="ft_list">
+
+    </div>
+    
+</body>
+</html>
+<style>
+    #ft_list
+    {
+        margin: auto;
+        width: 40%;
+        border: 2px black solid;
+        height: 700px;
+        padding: 2%;
+    }
+</style>
+<script>
+let bod = document.getElementsByTagName("body");
+//bod.addEventListener("load", checkCookie);
+
+let btn = document.getElementById("button");
+btn.addEventListener("click", addElement);
+let list = document.getElementById("ft_list");
+document.addEventListener("DOMContentLoaded", loadTasksFromCookie);
+
+function addElement() {
+    
+
+
+    let todo = prompt("Please enter a to do")
+    let para = document.createElement("p");
+    para.innerText = todo;
+    para.style.cursor = "pointer"; 
+    para.addEventListener("click", removeElement); 
+    list.insertBefore(para, list.firstChild);
+    saveTasksToCookie();
+}
+
+function removeElement(event) {
+
+    let text = "You are removing a to do. Are you sure?"
+
+    if(confirm(text) == true){
+            event.target.remove();
+            saveTasksToCookie();
+    }
+}
+
+    function saveTasksToCookie() {
+            let tasks = Array.from(list.getElementsByTagName("p")).map(p => p.innerText);
+            document.cookie = "tasks=" + JSON.stringify(tasks) + "; path=/; max-age=" + 60 * 60 * 24 * 7; // Expira en 7 días
+        }
+
+        function loadTasksFromCookie() {
+            let cookies = document.cookie.split('; ');
+            let taskCookie = cookies.find(cookie => cookie.startsWith('tasks='));
+            if (taskCookie) {
+                let tasks = JSON.parse(taskCookie.split('=')[1]);
+                tasks.forEach(task => {
+                    let para = document.createElement("p");
+                    para.innerText = task;
+                    para.style.cursor = "pointer";
+                    para.addEventListener("click", removeElement);
+                    list.appendChild(para);
+                });
+}
+        }
+    
+
+//function checkCookie(){}
+
+</script>
